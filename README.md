@@ -1,6 +1,8 @@
 # Neo4j & Python
 > Working with Graphs using Neo4j and Python
 
+![neo4j python](images/show.png)
+
 ## How to Run
 Everything is ready to run with a single command after repository cloning. Thanks to docker-compose, we can spin up Jupyter Lab and Neo4j services in no time.
 
@@ -12,11 +14,12 @@ docker-compose up
 
 To shutdown, `docker-compose down`. We can add `-v` at the end of the command to remove also volumes, the datasets.
 
-Docker-compose will log a link and token to Jupyter Lab. You can also get the link and token with `docker container logs jupyter_lab`
+Docker-compose will log a link and token to Jupyter Lab. You can also get the link and token with `docker container logs jupyter_lab`. To connect to Neo4j, head to  `localhost:7474` and login in Neo4j broswer connection url `bolt://localhost:7687`, default username:`neo4j` and password:`test`.
 
+Hurrah, you made it. Try out the test.ipynb to get the joy of Python and Neo4j.
+
+## Settings
 The docker-compose comes with default settings that can be overide. Example, the Jupyter Lab user is `danpra`. If you want to set your own user, edit the docker-compose.yml
-
-Neo4js is at `localhost:7474` with bolt connection url `bolt://localhost:7687`, default username:`neo4j` and password:`test`. 
 
 Connection url in Jupyter Lab is 'bolt://neo4j:test@neo4j:7687' às neo4j is the name of our service in docker-compose.yml.
 

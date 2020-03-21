@@ -1,2 +1,4 @@
-*/__pycache__/
+*/__pycache__/*
 */.ipynb_checkpoints/*
+neo4j/data/*
+neo4j/logs/*
