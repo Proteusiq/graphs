@@ -23,6 +23,98 @@ The docker-compose comes with default settings that can be overide. Example, the
 
 Connection url in Jupyter Lab is `bolt://neo4j:test@neo4j:7687` as neo4j is the name of our service in docker-compose.yml.
 
+## Simple Family Graph: Test of Cypher & Neo4j
+Cypher is the Python of query languages. It is beautiful, intuitive and simple. Here an example of created dataset and start asking it, yes your dataset, questions.
+
+```cypher
+
+// Creating the graph: N.B: Enable multi statement query editor on your settings
+//Create Person and Location
+MERGE (p:Person {name:"Prayson",age:34, description:"The Matrix's Neo"});
+MERGE (:Person {name:"Lea", age:32, description:"The awesome"});
+MERGE (p:Person {name:"Eloise",age:8, description:"The dancer"});
+MERGE (p:Person {name:"Nora",age:5, description:"The wise"});
+MERGE (p:Person {name:"Mario",age:3, description:"The Jumper"});
+MERGE (:Location {address:"Gurrevej 48"});
+
+
+//Add p person relationship to location l
+MATCH (p:Person),(l:Location {address:"Gurrevej 48"})
+WHERE p.name in ['Prayson','Mario', 'Nora','Eloise', 'Lea']
+MERGE (p)-[:LIVES_IN]->(l);
+
+// Add marriage
+MATCH (p:Person {name:"Lea"}),(o:Person {name:"Prayson"})
+MERGE (p)<-[:MARRIED_TO]-(o)<-[:MARRIED_TO]-(p);
+
+// Add childrens
+MATCH (p:Person), (o:Person)
+WHERE p.name =["Lea", "Prayson"] and o.name IN ["Eloise","Nora","Mario"]
+MERGE (p)<-[:CHILD_OF]-(o);
+```
+
+Show graph:
+```cypher
+MATCH (n) RETURN n LIMIT 6
+```
+![neo4j python](images/family.png)
+
+Who is Prayson?:
+```cypher
+MATCH (p:Person)
+WHERE p.name = "Prayson"
+RETURN p.description AS `Who is Prayson?`
+```
+![neo4j python](images/who.png)
+
+
+Who is Prayson?:
+```cypher
+MATCH (p:Person)
+WHERE p.name = "Prayson"
+RETURN p.description AS `Who is Prayson?`
+```
+![neo4j python](images/who.png)
+
+
+Who is Prayson?:
+```cypher
+MATCH (p:Person)
+WHERE p.name = "Prayson"
+RETURN p.description AS `Who is Prayson?`
+```
+![neo4j python](images/who.png)
+
+
+What are the name and age of people leaving in Gurrevej 48 under 18 years old?:
+```cypher
+MATCH (under_age:Person),(location:Location)
+WHERE under_age.age < 18 and location.address="Gurrevej 48"
+RETURN under_age.name AS `Children`, under_age.age AS `Age`
+```
+![neo4j python](images/children.png)
+
+
+Who lives in Gurrevej 48:
+```cypher
+MATCH (p:Person)-[:LIVES_IN]->(l:Location)
+WHERE l.address = "Gurrevej 48"
+RETURN collect(p.name) AS `Who lives in Gurrevej 48?`
+```
+![neo4j python](images/all_lives.png)
+
+
+How many children does Prayson have?:
+```cypher
+MATCH (child:Person)-[:CHILD_OF]->(parent:Person)
+WHERE parent.name = "Prayson"
+RETURN count(child) AS `How many children does Prayson have?`
+```
+![neo4j python](images/child_cnt.png)
+
+
+
+
 _Remember_: You need to rebuild the services with `docker-compose up --build` for any new changes in requirements.txt, yml or Dockerfile to take effect.
 
 Note: We are moutning `neomodel` to notebook as the current neomodel does not support Neo4J 4.X. Until fixed, this is a temporary hack-solution.
