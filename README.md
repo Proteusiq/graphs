@@ -92,7 +92,7 @@ RETURN p.description AS `Who is Prayson?`
 ![neo4j python](images/who.png)
 
 
-What are the name and age of people leaving in Gurrevej 48 under 18 years old?:
+What are the names and age of children leaving in Gurrevej 48 under 18 years old?:
 <details><summary>Query</summary>
 <p>
 
