@@ -59,23 +59,6 @@ MATCH (n) RETURN n LIMIT 6
 ```
 ![neo4j python](images/family.png)
 
-Who is Prayson?:
-```cypher
-MATCH (p:Person)
-WHERE p.name = "Prayson"
-RETURN p.description AS `Who is Prayson?`
-```
-![neo4j python](images/who.png)
-
-
-Who is Prayson?:
-```cypher
-MATCH (p:Person)
-WHERE p.name = "Prayson"
-RETURN p.description AS `Who is Prayson?`
-```
-![neo4j python](images/who.png)
-
 
 Who is Prayson?:
 ```cypher
