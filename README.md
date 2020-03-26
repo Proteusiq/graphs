@@ -61,38 +61,74 @@ MATCH (n) RETURN n LIMIT 6
 
 
 Who is Prayson?:
+<details><summary>Query</summary>
+<p>
+
+#### query for 'Who is Prayson?'
+
 ```cypher
 MATCH (p:Person)
 WHERE p.name = "Prayson"
 RETURN p.description AS `Who is Prayson?`
 ```
+</p>
+</details>
+
 ![neo4j python](images/who.png)
 
 
 What are the name and age of people leaving in Gurrevej 48 under 18 years old?:
+<details><summary>Query</summary>
+<p>
+
+#### query for 'people leaving in Gurrevej 48 under 18 years old?'
+
 ```cypher
 MATCH (under_age:Person),(location:Location)
 WHERE under_age.age < 18 and location.address="Gurrevej 48"
 RETURN under_age.name AS `Children`, under_age.age AS `Age`
 ```
+</p>
+</details>
+
+
 ![neo4j python](images/children.png)
 
 
-Who lives in Gurrevej 48:
+Who lives in Gurrevej 48?:
+<details><summary>Query</summary>
+<p>
+
+#### show, 'Who lives in Gurrevej 48?'
+
 ```cypher
 MATCH (p:Person)-[:LIVES_IN]->(l:Location)
 WHERE l.address = "Gurrevej 48"
 RETURN collect(p.name) AS `Who lives in Gurrevej 48?`
 ```
+
+</p>
+</details>
+
+
 ![neo4j python](images/all_lives.png)
 
 
 How many children does Prayson have?:
+<details><summary>Query</summary>
+<p>
+
+#### show, 'How many children does Prayson have?'
+
 ```cypher
 MATCH (child:Person)-[:CHILD_OF]->(parent:Person)
 WHERE parent.name = "Prayson"
 RETURN count(child) AS `How many children does Prayson have?`
 ```
+
+</p>
+</details>
+
 ![neo4j python](images/child_cnt.png)
 
 
