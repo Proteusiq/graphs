@@ -49,7 +49,11 @@ MERGE (p)<-[:MARRIED_TO]-(o)<-[:MARRIED_TO]-(p);
 
 // Add childrens
 MATCH (p:Person), (o:Person)
-WHERE p.name =["Lea", "Prayson"] and o.name IN ["Eloise","Nora","Mario"]
+WHERE p.name = "Prayson" and o.name IN ["Eloise","Nora","Mario"]
+MERGE (p)<-[:CHILD_OF]-(o);
+
+MATCH (p:Person), (o:Person)
+WHERE p.name ="Lea" and o.name IN ["Eloise","Nora","Mario"]
 MERGE (p)<-[:CHILD_OF]-(o);
 ```
 
@@ -69,6 +73,10 @@ Who is Prayson?:
 ```cypher
 MATCH (p:Person)
 WHERE p.name = "Prayson"
+RETURN p.description AS `Who is Prayson?`
+
+// OR
+MATCH (p:Person {name: "Prayson"})
 RETURN p.description AS `Who is Prayson?`
 ```
 </p>
@@ -132,7 +140,67 @@ RETURN count(child) AS `How many children does Prayson have?`
 ![neo4j python](images/child_cnt.png)
 
 
+## Power of Cypher over SQL: GraphDB > RelationalDB
 
+So far, we could have performed the queries above with SQL in tabular data. Let's gear up. We know that in real world, relationship are more richer and wider. Let's introduce more relationships.
+
+<details><summary>Getting Large</summary>
+<p>
+
+#### show, 'How many children does Prayson have?'
+```cypher
+//Add more members: My dad, brothers, nephew, and niece
+MERGE (:Person {name:"Wilfred", age:59, description:"Babu"});
+MERGE (:Person {name:"Eric", age:35, description: "First blood"});
+MERGE (:Person {name:"Jimmy", age:29, description: "Quantum MD"});
+MERGE (:Person {name:"Trace", age:10});
+MERGE (:Person {name:"Trisher", age:3);
+
+//Add relationship
+MATCH (p:Person), (o:Person)
+WHERE p.name ="Wilfred" and o.name IN ["Eric","Prayson","Jimmy"]
+MERGE (p)<-[:CHILD_OF]-(o)
+
+MATCH (p:Person), (o:Person)
+WHERE p.name ="Eric" and o.name IN ["Trace","Trisher"]
+MERGE (p)<-[:CHILD_OF]-(o)
+
+//Did not include my mother to keep things simple
+```
+</p>
+</details>
+
+![extend relation](images/bigger_family.png)
+
+### Cypher > SQL
+The power of Cypher comes in query relationships. Imagine we wanted to know the names of `Wilfred` grandchildren. In SQL, you will have to perform a number of table joins to archieve these. The farther the link, the more joins you will have. With Cypher, two lines of code is all you need.
+
+<details><summary>Two lines of Code</summary>
+<p>
+
+```
+MATCH (grand_child:Person)-[:CHILD_OF*2]->(babu:Person {name: "Wilfred"})
+RETURN collect(grand_child.name) AS `Wilfred's grand children are:`
+```
+</p>
+</details>
+
+![extend relation](images/grand_childs.png)
+
+There is more, we can ask: What is the shortest `child-of path` relationship between `Mario` and `Jimmy`?
+
+<details><summary>Query</summary>
+<p>
+
+```
+MATCH (mario:Person { name: 'Mario' }),(jimmy:Person { name: 'Jimmy' }),
+      path = shortestPath((mario)-[:CHILD_OF*]-(jimmy))
+RETURN path
+```
+</p>
+</details>
+
+![extend relation](images/mario_jimmy.png)
 
 _Remember_: You need to rebuild the services with `docker-compose up --build` for any new changes in requirements.txt, yml or Dockerfile to take effect.
 
