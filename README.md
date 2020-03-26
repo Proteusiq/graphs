@@ -187,7 +187,7 @@ RETURN collect(grand_child.name) AS `Wilfred's grand children are:`
 
 ![extend relation](images/grand_childs.png)
 
-There is more, we can ask: What is the shortest `child-of path` relationship between `Mario` and `Jimmy`?
+There is more. We can ask: What is the shortest `child-of path` relationship between `Mario` and `Jimmy`?
 
 <details><summary>Query</summary>
 <p>
