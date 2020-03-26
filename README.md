@@ -24,7 +24,7 @@ The docker-compose comes with default settings that can be overide. Example, the
 Connection url in Jupyter Lab is `bolt://neo4j:test@neo4j:7687` as neo4j is the name of our service in docker-compose.yml.
 
 ## Simple Family Graph: Taste of Cypher & Neo4j
-Cypher is the Python of query languages. It is beautiful, intuitive and simple. Here an example of created dataset and start asking it, yes your dataset, questions.
+Cypher is the Python of query languages. It is beautiful, intuitive and simple. To show you it power, let's create a simple dataset and start asking it, yes our dataset, questions.
 
 <details><summary>Create Graph Data Query</summary>
 <p>
