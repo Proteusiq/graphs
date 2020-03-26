@@ -173,7 +173,7 @@ MERGE (p)<-[:CHILD_OF]-(o)
 ![extend relation](images/bigger_family.png)
 
 ### Cypher > SQL
-The power of Cypher comes in query relationships. Imagine we wanted to know the names of `Wilfred` grandchildren. In SQL, you will have to perform a number of table joins to archieve these. The farther the link, the more joins you will have. With Cypher, two lines of code is all you need.
+The power of Cypher comes in query relationships. Imagine we wanted to know the names of `Wilfred` grandchildren. In SQL, you will have to perform a number of table joins to achieve these. The farther the link, the more joins you will have. With Cypher, two lines of code is all you need.
 
 <details><summary>Two lines of Code</summary>
 <p>
