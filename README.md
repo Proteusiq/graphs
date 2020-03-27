@@ -211,6 +211,12 @@ RETURN path
 
 ![extend relation](images/mario_jimmy.png)
 
+
+## Information
 _Remember_: You need to rebuild the services with `docker-compose up --build` for any new changes in requirements.txt, yml or Dockerfile to take effect.
 
 Note: We are moutning `neomodel` to notebook as the current neomodel does not support Neo4J 4.X. Until fixed, this is a temporary hack-solution.
+
+## About Version and Neo4j Plugins
+
+I have pinned Neo4j to version 4.0.2 and downloaded Apoc 4.0.0.4. See [Apoc Github](https://github.com/neo4j-contrib/neo4j-apoc-procedures) for more information.
