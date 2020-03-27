@@ -37,12 +37,12 @@ Cypher is the Python of query languages. It is beautiful, intuitive and simple. 
 
 // Creating the graph: N.B: Enable multi statement query editor on your settings
 //Create Person and Location
-MERGE (p:Person {name:"Prayson",age:34, description:"The Matrix's Neo"});
-MERGE (:Person {name:"Lea", age:32, description:"The awesome"});
-MERGE (p:Person {name:"Eloise",age:8, description:"The dancer"});
-MERGE (p:Person {name:"Nora",age:5, description:"The wise"});
-MERGE (p:Person {name:"Mario",age:3, description:"The Jumper"});
-MERGE (:Location {address:"Gurrevej 48"});
+MERGE (:Person {name:"Prayson",age:34, description:"The Matrix's Neo"}),
+      (:Person {name:"Lea", age:32, description:"The awesome"}),
+      (:Person {name:"Eloise",age:8, description:"The dancer"}),
+      (:Person {name:"Nora",age:5, description:"The wise"}),
+      (:Person {name:"Mario",age:3, description:"The Jumper"}),
+      (:Location {address:"Gurrevej 48"});
 
 
 //Add p person relationship to location l
@@ -94,7 +94,7 @@ RETURN p.description AS `Who is Prayson?`
 ![neo4j python](images/who.png)
 
 
-What are the name and age of people leaving in Gurrevej 48 under 18 years old?:
+What are the names and age of children leaving in Gurrevej 48 under 18 years old?:
 <details><summary>Query</summary>
 <p>
 
@@ -159,11 +159,11 @@ So far, we could have performed the queries above with SQL in tabular data. Let'
 #### show, 'How many children does Prayson have?'
 ```cypher
 //Add more members: My dad, brothers, nephew, and niece
-MERGE (:Person {name:"Wilfred", age:59, description:"Babu"});
-MERGE (:Person {name:"Eric", age:35, description: "First blood"});
-MERGE (:Person {name:"Jimmy", age:29, description: "Quantum MD"});
-MERGE (:Person {name:"Trace", age:10});
-MERGE (:Person {name:"Trisher", age:3);
+MERGE (:Person {name:"Wilfred", age:59, description:"Babu"}),
+      (:Person {name:"Eric", age:35, description: "First blood"}),
+      (:Person {name:"Jimmy", age:29, description: "Quantum MD"}),
+      (:Person {name:"Trace", age:10}),
+      (:Person {name:"Trisher", age:3);
 
 //Add relationship
 MATCH (p:Person), (o:Person)
