@@ -18,10 +18,11 @@ services:
       - net
   neo4j:
     container_name: neo4j
-    image: "neo4j:latest"
+    image: "neo4j:4.0.2"
     environment:
       - NEO4J_AUTH=neo4j/test
       - NEO4J_dbms_memory_pagecache_size=1G #default 512M
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.\\\*
     ports:
       - 7474:7474
       - 7473:7473
@@ -29,8 +30,8 @@ services:
     volumes:
       - ./neo4j/data:/data
       - ./neo4j/logs:/logs
-      # - ./neo4j/import:/var/lib/neo4j/import
-      # - ./neo4j/plugins:/plugins
+      - ./neo4j/import:/var/lib/neo4j/import
+      - ./neo4j/plugins:/plugins
       - ./neo4j/conf:/var/lib/neo4j/conf
     networks: 
       - net
