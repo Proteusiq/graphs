@@ -1,5 +1,6 @@
 # Neo4j & Python
-> Working with Graphs using Neo4j and Python
+> Working with Graphs using Neo4j and Python: __Cypher + Graphene + Neomodel = <3__
+
 
 ![neo4j python](images/show.png)
 
@@ -213,9 +214,17 @@ RETURN path
 
 
 ## Information
+
 _Remember_: You need to rebuild the services with `docker-compose up --build` for any new changes in requirements.txt, yml or Dockerfile to take effect.
 
-Note: We are moutning `neomodel` to notebook as the current neomodel does not support Neo4J 4.X. Until fixed, this is a temporary hack-solution.
+| NOTE        | We are moutning `neomodel` to notebook as the current neomodel does not support Neo4J 4.X. Until fixed, this is a temporary hack-solution.|
+|---------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+
+## TODO:
+![ ] Create graphene examples
+![ ] Add FastAPI to server GraphQL with graphene
+![ ] Add a second docker-compose with FastAPI image
+
 
 ## About Version and Neo4j Plugins
 
