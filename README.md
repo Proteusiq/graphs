@@ -221,9 +221,10 @@ _Remember_: You need to rebuild the services with `docker-compose up --build` fo
 |---------------|:------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## TODO:
-![ ] Create graphene examples
-![ ] Add FastAPI to server GraphQL with graphene
-![ ] Add a second docker-compose with FastAPI image
+
+- [ ] Create graphene examples
+- [ ] Add FastAPI to server GraphQL with graphene
+- [ ] Add a second docker-compose with FastAPI image
 
 
 ## About Version and Neo4j Plugins
