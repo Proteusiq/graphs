@@ -10,7 +10,7 @@ RUN conda install --quiet --yes \
     'pandas'\
     && python -m pip install -r /tmp/requirements.txt \
     && useradd -rm -d /home/${NOTEBOOK_USER:-danpra} -s /bin/bash -g root -G sudo -u 1000 ${NOTEBOOK_USER:-danpra}\
-    && mkdir /home/${NOTEBOOK_USER:-danpra}/project \ 
+    && mkdir -p /home/${NOTEBOOK_USER:-danpra}/project \ 
     && chown -R ${NOTEBOOK_USER:-danpra}: /home/${NOTEBOOK_USER:-danpra}/project
 
 WORKDIR /home/${NOTEBOOK_USER:-danpra}
