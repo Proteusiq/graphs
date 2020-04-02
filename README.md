@@ -17,7 +17,7 @@ To start only Neo4J service execute: `docker-compose up neo4j`
 
 To shutdown, `docker-compose down`. We can add `-v` at the end of the command to remove also volumes, the datasets.
 
-Docker-compose will log a link and token to Jupyter Lab. You can also get the link and token with `docker container logs jupyter_lab`. To connect to Neo4j, head to  `localhost:7474` and login in Neo4j browser. The connection url is `bolt://localhost:7687`, default username:`neo4j` and password:`test`.
+Docker-compose will log a link and token to Jupyter Lab. You can also get the link and token with `docker container logs jupyter_lab`. To connect to Neo4j, head to  `localhost:7474` and login in Neo4j browser. The connection url is `bolt://localhost:7687`. Login username and password is disabled for development, you can set them back on docker-compose file, default username:`neo4j` and password:`test`.
 
 Hurrah, you made it. Try out the test.ipynb to get the joy of Python and Neo4j.
 

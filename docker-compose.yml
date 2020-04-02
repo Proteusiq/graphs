@@ -13,7 +13,7 @@ services:
       - 8888:8888
     volumes:
     - ./notebook/projects:/home/${NOTEBOOK_USER:-/danpra}/project
-    #- ./notebook/neomodel:/opt/conda/lib/python3.7/site-packages/neomodel #neomodel support neo4j 4.x
+    #- ./notebook/neomodel:/opt/conda/lib/python3.7/site-packages/neomodel #neomodel support for neo4j 4.x
     depends_on:
       - neo4j
     networks: 
