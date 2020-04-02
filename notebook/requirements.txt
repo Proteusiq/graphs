@@ -1,2 +1,3 @@
 neomodel>=3.3.2
+py2neo>=4.3.0
 graphene>=2.0
