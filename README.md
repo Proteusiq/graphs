@@ -37,7 +37,18 @@ Cypher is the Python of query languages. It is beautiful, intuitive and simple. 
 ```cypher
 
 // Creating the graph: N.B: Enable multi statement query editor on your settings
-//Create Person and Location
+//Create Person and Location 
+
+//Neo4j 3.X
+
+MERGE (:Person {name:"Prayson",age:34, description:"The Matrix's Neo"})
+MERGE (:Person {name:"Lea", age:32, description:"The awesome"})
+MERGE (:Person {name:"Eloise",age:8, description:"The dancer"})
+MERGE (:Person {name:"Nora",age:5, description:"The wise"})
+MERGE (:Person {name:"Mario",age:3, description:"The Jumper"})
+MERGE (:Location {address:"Gurrevej 48"}); 
+
+// Neo4j 4.x
 MERGE (:Person {name:"Prayson",age:34, description:"The Matrix's Neo"}),
       (:Person {name:"Lea", age:32, description:"The awesome"}),
       (:Person {name:"Eloise",age:8, description:"The dancer"}),
@@ -46,10 +57,11 @@ MERGE (:Person {name:"Prayson",age:34, description:"The Matrix's Neo"}),
       (:Location {address:"Gurrevej 48"});
 
 
+
 //Add p person relationship to location l
-MATCH (p:Person),(l:Location {address:"Gurrevej 48"})
-WHERE p.name in ['Prayson','Mario', 'Nora','Eloise', 'Lea']
-MERGE (p)-[:LIVES_IN]->(l);
+MATCH (person:Person),(location:Location {address:"Gurrevej 48"})
+WHERE person.name in ['Prayson','Mario', 'Nora','Eloise', 'Lea']
+MERGE (person)-[:LIVES_IN]->(location);
 
 // Add marriage
 MATCH (p:Person {name:"Lea"}),(o:Person {name:"Prayson"})
@@ -160,20 +172,31 @@ So far, we could have performed the queries above with SQL in tabular data. Let'
 #### show, 'How many children does Prayson have?'
 ```cypher
 //Add more members: My dad, brothers, nephew, and niece
+
+//Neo4j 3.x
+
+MERGE (:Person {name:"Wilfred", age:59, description:"Babu"})
+MERGE (:Person {name:"Eric", age:35, description: "First blood"})
+MERGE (:Person {name:"Jimmy", age:29, description: "Quantum MD"})
+MERGE (:Person {name:"Trace", age:10})
+MERGE (:Person {name:"Trisher", age:3});
+
+
+//Neo4j 4.x
 MERGE (:Person {name:"Wilfred", age:59, description:"Babu"}),
       (:Person {name:"Eric", age:35, description: "First blood"}),
       (:Person {name:"Jimmy", age:29, description: "Quantum MD"}),
       (:Person {name:"Trace", age:10}),
-      (:Person {name:"Trisher", age:3);
+      (:Person {name:"Trisher", age:3});
 
 //Add relationship
-MATCH (p:Person), (o:Person)
-WHERE p.name ="Wilfred" and o.name IN ["Eric","Prayson","Jimmy"]
-MERGE (p)<-[:CHILD_OF]-(o)
+MATCH (parent:Person), (child:Person)
+WHERE parent.name ="Wilfred" and child.name IN ["Eric","Prayson","Jimmy"]
+MERGE (parent)<-[:CHILD_OF]-(child)
 
-MATCH (p:Person), (o:Person)
-WHERE p.name ="Eric" and o.name IN ["Trace","Trisher"]
-MERGE (p)<-[:CHILD_OF]-(o)
+MATCH (parent:Person), (child:Person)
+WHERE parent.name ="Eric" and child.name IN ["Trace","Trisher"]
+MERGE (parent)<-[:CHILD_OF]-(child)
 
 //Did not include my mother to keep things simple
 ```
@@ -217,7 +240,7 @@ RETURN path
 
 _Remember_: You need to rebuild the services with `docker-compose up --build` for any new changes in requirements.txt, yml or Dockerfile to take effect.
 
-| NOTE        | We are moutning `neomodel` to notebook as the current neomodel does not support Neo4J 4.X. Until fixed, this is a temporary hack-solution.|
+| NOTE        | If using Neo4j 4.x, mount `neomodel` to notebook as the current neomodel does not support Neo4J 4.X. Until fixed, this is a temporary hack-solution.|
 |---------------|:------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## TODO:
@@ -229,4 +252,4 @@ _Remember_: You need to rebuild the services with `docker-compose up --build` fo
 
 ## About Version and Neo4j Plugins
 
-I have pinned Neo4j to version 4.0.2 and downloaded Apoc 4.0.0.4. See [Apoc Github](https://github.com/neo4j-contrib/neo4j-apoc-procedures) for more information.
+I have pinned Neo4j to version 3.5.14 and downloaded Apoc 3.5 and Algo 3.5 See [Apoc Github](https://github.com/neo4j-contrib/neo4j-apoc-procedures) and [Algo Github](https://github.com/neo4j-contrib/neo4j-graph-algorithms) for more information.

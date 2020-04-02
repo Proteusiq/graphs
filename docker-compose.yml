@@ -13,18 +13,19 @@ services:
       - 8888:8888
     volumes:
     - ./notebook/projects:/home/${NOTEBOOK_USER:-/danpra}/project
-    - ./notebook/neomodel:/opt/conda/lib/python3.7/site-packages/neomodel #neomodel support neo4j 4.x
+    #- ./notebook/neomodel:/opt/conda/lib/python3.7/site-packages/neomodel #neomodel support neo4j 4.x
     depends_on:
       - neo4j
     networks: 
       - net
   neo4j:
     container_name: neo4j
-    image: "neo4j:4.0.2"
+    image: neo4j:3.5.14
     environment:
-      - NEO4J_AUTH=neo4j/test
+      - NEO4J_AUTH=none #neo4j/test
       - NEO4J_dbms_memory_pagecache_size=1G #default 512M
       - NEO4J_dbms_security_procedures_unrestricted=apoc.\\\*
+      - NE04J_dbms.security.procedures.unrestricted=algo.\\\*
     ports:
       - 7474:7474
       - 7473:7473
